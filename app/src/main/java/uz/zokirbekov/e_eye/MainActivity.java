@@ -9,7 +9,10 @@ import android.widget.FrameLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uz.zokirbekov.e_eye.fragments.HomeFragment;
+import uz.zokirbekov.e_eye.fragments.MainFragment;
 import uz.zokirbekov.e_eye.fragments.RegistrationFragment;
+import uz.zokirbekov.e_eye.fragments.StatisticsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        switchFragment(new RegistrationFragment());
+        switchFragment(new MainFragment());
     }
     public void switchFragment(Fragment fragment)
     {
