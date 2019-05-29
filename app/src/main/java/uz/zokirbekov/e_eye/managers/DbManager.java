@@ -2,6 +2,8 @@ package uz.zokirbekov.e_eye.managers;
 
 import android.content.Context;
 
+import java.util.Date;
+
 import io.realm.Realm;
 import uz.zokirbekov.e_eye.models.Action;
 
@@ -27,10 +29,16 @@ public class DbManager {
         realm = Realm.getDefaultInstance();
     }
 
-    public void addAction(Action act)
+    public void addAction(String title, String image, String additional)
     {
         realm.beginTransaction();
-        Action action = realm.createObject(Action.class,act);
+        Action action = realm.createObject(Action.class);
+
+        action.setTitle(title);
+        action.setAdditional(additional);
+        action.setImage(image);
+        action.setCreate_date(new Date());
+
         realm.commitTransaction();
     }
 
