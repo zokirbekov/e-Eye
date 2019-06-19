@@ -10,7 +10,7 @@ public class Action extends RealmObject {
     private long id;
 
     private String title;
-    private String image;
+    private byte[] image;
     private Date create_date;
     private String additional;
     private int status;
@@ -31,11 +31,11 @@ public class Action extends RealmObject {
         this.title = title;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 
