@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        app:itemBackground="@drawable/bottom_navigation_background"
-        app:itemIconTint="@color/colorLightBlue"
+        app:itemIconTint="@drawable/bottom_navigation_title"
         app:itemTextColor="@drawable/bottom_navigation_title"
+        app:itemBackground="@drawable/bottom_navigation_background"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

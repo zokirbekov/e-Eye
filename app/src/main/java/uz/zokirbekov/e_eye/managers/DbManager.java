@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -38,14 +39,14 @@ public class DbManager {
     public void addAction(String title, byte[] image, String additional)
     {
         realm.beginTransaction();
-        Action action = realm.createObject(Action.class);
+        Action action = realm.createObject(Action.class, UUID.randomUUID().toString());
         action.setTitle(title);
         action.setAdditional(additional);
         action.setImage(image);
         action.setCreate_date(new Date());
-
         realm.commitTransaction();
     }
+
 
     public List<Action> getAllActions()
     {
