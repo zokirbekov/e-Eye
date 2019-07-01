@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="colorUnconfirmed">#E74C3C</color>
-    <color name="colorConfirmed">#2ECC71</color>
-    <color name="colorInProgress">#ccc</color>
+    <color name="colorUnconfirmed">#d32f2f</color>
+    <color name="colorConfirmed">#43a047</color>
+    <color name="colorInProgress">#546e7a</color>
 
     <color name="colorLightBlue">#8cb7ff</color>
     <color name="colorWhite">#fff</color>
