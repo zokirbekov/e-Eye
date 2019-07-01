@@ -16,9 +16,9 @@ public class DbManager {
     private Context context;
     private Realm realm;
 
-    public static int CONFIRMED = 1;
-    public static int UNCONFIRMED = -1;
-    public static int IN_PROGRESS = 0;
+    public static final int CONFIRMED = 1;
+    public static final int UNCONFIRMED = -1;
+    public static final int IN_PROGRESS = 0;
 
     public static DbManager getInstance(Context context) {
         if (instance == null)
@@ -41,6 +41,7 @@ public class DbManager {
         realm.beginTransaction();
         Action action = realm.createObject(Action.class, UUID.randomUUID().toString());
         action.setTitle(title);
+        action.setStatus(-1);
         action.setAdditional(additional);
         action.setImage(image);
         action.setCreate_date(new Date());

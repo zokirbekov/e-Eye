@@ -37,8 +37,8 @@ public class MainFragment extends Fragment implements BottomNavigationView.OnNav
         View v = inflater.inflate(R.layout.fragment_main,container,false);
         ButterKnife.bind(this,v);
         navBar.setOnNavigationItemSelectedListener(this);
-        List<Action> vt = DbManager.getInstance(getContext()).getAllActions();
-        System.out.println();
+
+        switchFragment(homeFragment);
         return v;
     }
 
@@ -54,7 +54,6 @@ public class MainFragment extends Fragment implements BottomNavigationView.OnNav
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
 
         switch (item.getItemId())
         {
