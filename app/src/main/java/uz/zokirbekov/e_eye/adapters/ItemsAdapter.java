@@ -111,17 +111,17 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.VH> {
             switch (status)
             {
                 case DbManager.CONFIRMED:
-                    cardView.setCardBackgroundColor(ContextCompat.getColor(context,R.color.colorConfirmed));
+                    cardView.setBackground(ContextCompat.getDrawable(context,R.drawable.gradient_color_confirmed));
                     item_status.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.confirmed));
                     break;
 
                 case DbManager.IN_PROGRESS:
-                    cardView.setCardBackgroundColor(ContextCompat.getColor(context,R.color.colorInProgress));
+                    cardView.setBackground(ContextCompat.getDrawable(context,R.drawable.gradient_color_in_progress));
                     item_status.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.progress));
                     break;
 
                 case DbManager.UNCONFIRMED:
-                    cardView.setCardBackgroundColor(ContextCompat.getColor(context,R.color.colorUnconfirmed));
+                    cardView.setBackground(ContextCompat.getDrawable(context,R.drawable.gradient_color_unconfirmed));
                     item_status.setImageDrawable(ContextCompat.getDrawable(context,R.drawable.uncofirmed));
                     break;
             }
