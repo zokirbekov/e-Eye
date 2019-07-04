@@ -17,6 +17,8 @@ public class NewActionFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_new_action,container,false);
         ButterKnife.bind(this,v);
+
         return v;
     }
+
 }

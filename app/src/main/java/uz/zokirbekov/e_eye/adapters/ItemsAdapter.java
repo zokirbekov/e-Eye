@@ -8,6 +8,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -53,6 +56,9 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.VH> {
 
         if (data != null)
             holder.item_image.setImageBitmap(BitmapFactory.decodeByteArray(data,0,data.length));
+
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.item_animation);
+        holder.itemView.startAnimation(animation);
 
     }
 
@@ -106,7 +112,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.VH> {
                 isFrontSide = true;
             }
         }
-        public void setStatus(int status)
+        private void setStatus(int status)
         {
             switch (status)
             {
