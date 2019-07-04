@@ -12,44 +12,56 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import uz.zokirbekov.e_eye.R;
+import uz.zokirbekov.e_eye.managers.DbManager;
+import uz.zokirbekov.e_eye.models.Action;
 
 public class StatisticsFragment extends Fragment {
 
     @BindView(R.id.barchart)
     BarChart chart;
 
+    List<Action> actions;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_statistics,container,false);
         ButterKnife.bind(this,v);
+        actions = DbManager.getInstance(getContext()).getAllActions();
         initChart();
         return v;
     }
 
     private void initChart()
     {
-        ArrayList n = new ArrayList();
-        n.add(new BarEntry(10, new float[] {1,2,3,4,5,6}));
-        n.add(new BarEntry(20, new float[] {1,2,3,4,5,6}));
-        n.add(new BarEntry(30, new float[] {1,2,3,4,5,6}));
+        List<Entry> confirmed = new ArrayList<>();
+        List<Entry> unconfirmed = new ArrayList<>();
+        List<Entry> in_progress = new ArrayList<>();
 
-        ArrayList<String> year = new ArrayList<>();
-        year.add("1");
-        year.add("2");
-        year.add("3");
 
-        BarDataSet dataSet = new BarDataSet(n,"Qwerty");
-        chart.animateY(5000);
-        BarData data = new BarData(dataSet);
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        chart.setData(data);
-}
+    }
+
+    private void insertActionsByStatus(List<Entry> data, int status)
+    {
+        String pattern = "dd.MM.yyyy";
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        Observable.fromIterable(actions)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter(act -> act.getStatus() == status)
+                .groupBy(act -> act.getCreate_date());
+    }
 
 }
