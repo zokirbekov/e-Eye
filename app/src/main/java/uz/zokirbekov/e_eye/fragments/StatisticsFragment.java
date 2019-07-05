@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -22,6 +24,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import uz.zokirbekov.e_eye.R;
@@ -31,7 +34,7 @@ import uz.zokirbekov.e_eye.models.Action;
 public class StatisticsFragment extends Fragment {
 
     @BindView(R.id.barchart)
-    BarChart chart;
+    LineChart chart;
 
     List<Action> actions;
 
@@ -50,18 +53,27 @@ public class StatisticsFragment extends Fragment {
         List<Entry> unconfirmed = new ArrayList<>();
         List<Entry> in_progress = new ArrayList<>();
 
+        //insertActionsByStatus(confirmed,DbManager.CONFIRMED);
+        //insertActionsByStatus(unconfirmed,DbManager.UNCONFIRMED);
+        insertActionsByStatus(in_progress,DbManager.IN_PROGRESS);
+
 
     }
 
     private void insertActionsByStatus(List<Entry> data, int status)
     {
-        String pattern = "dd.MM.yyyy";
+        String pattern = "MM.yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         Observable.fromIterable(actions)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter(act -> act.getStatus() == status)
-                .groupBy(act -> act.getCreate_date());
+                .groupBy(act -> format.format(act.getCreate_date()))
+                //.map(x -> )
+                .count();
+
+        //g.subscribe(x -> Toast.makeText(getContext(), String.valueOf(x), Toast.LENGTH_SHORT).show());
+
     }
 
 }

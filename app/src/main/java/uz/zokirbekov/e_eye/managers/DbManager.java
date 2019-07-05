@@ -36,7 +36,7 @@ public class DbManager {
         realm = Realm.getDefaultInstance();
     }
 
-    public void addAction(String title, byte[] image, String additional)
+    public void addAction(String title, String additional, byte[] image)
     {
         realm.beginTransaction();
         Action action = realm.createObject(Action.class, UUID.randomUUID().toString());

@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment {
 
     private void initAdapter(List<Action> actions)
     {
-        ItemsAdapter adapter = new ItemsAdapter(getContext(),actions);
+        ItemsAdapter adapter = new ItemsAdapter(this,actions);
         listView.setAdapter(adapter);
     }
 

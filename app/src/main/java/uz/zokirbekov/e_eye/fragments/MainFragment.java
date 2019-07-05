@@ -69,6 +69,7 @@ public class MainFragment extends Fragment implements BottomNavigationView.OnNav
     {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
+        ft.setCustomAnimations(R.anim.fragment_in_animation,R.anim.fragment_out_animation);
         ft.replace(R.id.main_content,fragment);
         ft.commit();
     }

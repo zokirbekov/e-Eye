@@ -1,7 +1,10 @@
 package uz.zokirbekov.e_eye.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import uz.zokirbekov.e_eye.R;
+import uz.zokirbekov.e_eye.fragments.ImageDialogFragment;
 import uz.zokirbekov.e_eye.managers.DbManager;
 import uz.zokirbekov.e_eye.models.Action;
 import uz.zokirbekov.e_eye.utils.AnimationHelper;
@@ -27,12 +31,14 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.VH> {
 
     private List<Action> items;
     private Context context;
+    private Fragment fragment;
     private LayoutInflater inflater;
 
-    public ItemsAdapter(Context context,List<Action> its)
+    public ItemsAdapter(Fragment fragment, List<Action> its)
     {
         items = its;
-        this.context = context;
+        this.context = fragment.getContext();
+        this.fragment = fragment;
         inflater = LayoutInflater.from(context);
     }
 
@@ -95,21 +101,28 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.VH> {
             cardView = (CardView)itemView;
 
             itemView.setOnClickListener(this);
+            item_image.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (isFrontSide)
-            {
-                AnimationHelper.getInstance().fadeOut(front);
-                AnimationHelper.getInstance().fadeIn(back);
-                isFrontSide = false;
-            }
-            else
-            {
-                AnimationHelper.getInstance().fadeOut(back);
-                AnimationHelper.getInstance().fadeIn(front);
-                isFrontSide = true;
+            switch (view.getId()) {
+                case R.id.cardView:
+                    if (isFrontSide) {
+                        AnimationHelper.getInstance().fadeOut(front);
+                        AnimationHelper.getInstance().fadeIn(back);
+                        isFrontSide = false;
+                    } else {
+                        AnimationHelper.getInstance().fadeOut(back);
+                        AnimationHelper.getInstance().fadeIn(front);
+                        isFrontSide = true;
+                    }
+                    break;
+                case R.id.item_image:
+                    Bitmap bitmap = ((BitmapDrawable)item_image.getDrawable()).getBitmap();
+                    ImageDialogFragment.newInstance(bitmap)
+                            .show(fragment.getFragmentManager(),"IMAGE_DIALOG_FRAGMENT");
+                    break;
             }
         }
         private void setStatus(int status)
