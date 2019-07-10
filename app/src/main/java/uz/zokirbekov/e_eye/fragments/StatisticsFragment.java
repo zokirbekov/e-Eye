@@ -1,6 +1,6 @@
 package uz.zokirbekov.e_eye.fragments;
 
-import android.graphics.Color;
+import android.icu.util.Freezable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,28 +10,21 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
-import io.reactivex.Single;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -65,18 +58,20 @@ public class StatisticsFragment extends Fragment {
         unconfirmed = new ArrayList<>();
         in_progress = new ArrayList<>();
 
-        insertActionsByStatus(confirmed,DbManager.CONFIRMED,false);
-        insertActionsByStatus(unconfirmed,DbManager.UNCONFIRMED,false);
-        insertActionsByStatus(in_progress,DbManager.IN_PROGRESS, true);
+        getCountActionsByStatusAndDate(confirmed,DbManager.CONFIRMED,false);
+        getCountActionsByStatusAndDate(unconfirmed,DbManager.UNCONFIRMED,false);
+        getCountActionsByStatusAndDate(in_progress,DbManager.IN_PROGRESS, true);
     }
 
     private void drawDatas()
     {
         List<ILineDataSet> dataSets = new ArrayList<>();
 
-        LineDataSet confirmedSet = new LineDataSet(confirmed, "Confirmed");
-        LineDataSet unconfirmedSet = new LineDataSet(unconfirmed, "Unxonfirmed");
-        LineDataSet inProgressSet = new LineDataSet(in_progress, "In progress");
+        //unconfirmed.add(new Entry(8,5));
+
+        LineDataSet confirmedSet   = new LineDataSet(confirmed, "Confirmed");
+        LineDataSet unconfirmedSet = new LineDataSet(unconfirmed, "Unconfirmed");
+        LineDataSet inProgressSet  = new LineDataSet(in_progress, "In progress");
 
         confirmedSet.setColor(ContextCompat.getColor(getContext(),R.color.colorConfirmed));
         unconfirmedSet.setColor(ContextCompat.getColor(getContext(),R.color.colorUnconfirmed));
@@ -90,7 +85,7 @@ public class StatisticsFragment extends Fragment {
         chart.invalidate();
     }
 
-    private void insertActionsByStatus(List<Entry> data, int status, boolean isLast)
+    private void getCountActionsByStatusAndDate(List<Entry> data, int status, boolean isLast)
     {
         String pattern = "MM.yyyy";
         SimpleDateFormat format = new SimpleDateFormat(pattern);
@@ -103,6 +98,25 @@ public class StatisticsFragment extends Fragment {
                 .flatMap( gr -> gr.count()
                                 .map(count -> new Pair(gr.getKey(),count))
                                 .toObservable())
+                                .sorted((x,y) ->
+                                {
+
+                                    String date1 = x.first.toString();
+                                    String date2 = y.first.toString();
+                                    long time1 = 0;
+                                    long time2 = 0;
+                                    try {
+
+                                        time1 = format.parse(date1).getTime();
+
+                                        time2 = format.parse(date2).getTime();
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+                                    return Long.compare(time1,time2);
+                                })
                 .doOnTerminate(
                         () -> {
                             if (isLast)
@@ -110,7 +124,7 @@ public class StatisticsFragment extends Fragment {
                         }
                 )
                 .subscribe(pair -> {
-                    long time = format.parse(pair.first.toString()).getTime();
+                    long time = format.parse(pair.first.toString()).getMonth()+1;
                     long count = (Long)pair.second;
                     data.add(new Entry(time,count));
                 });

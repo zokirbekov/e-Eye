@@ -2,6 +2,7 @@ package uz.zokirbekov.e_eye.managers;
 
 import android.content.Context;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -30,10 +31,43 @@ public class DbManager {
 
         return instance;
     }
+
+    private void addTest()
+    {
+        realm.beginTransaction();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MONTH,3);
+
+        for (int i=0;i<100;i++)
+        {
+
+            Action action = realm.createObject(Action.class, UUID.randomUUID().toString());
+            action.setTitle("test");
+            action.setAdditional("test test test");
+            action.setImage(null);
+            action.setCreate_date(calendar.getTime());
+            if (i % 3 == 0)
+            {
+                action.setStatus(DbManager.CONFIRMED);
+            }
+            else if (i % 4 == 0)
+            {
+                action.setStatus(DbManager.UNCONFIRMED);
+            }
+            else if (i % 5 == 0)
+            {
+                action.setStatus(DbManager.IN_PROGRESS);
+            }
+        }
+        realm.commitTransaction();
+    }
+
     private void initRealm()
     {
         Realm.init(context);
         realm = Realm.getDefaultInstance();
+        //addTest();
     }
 
     public void addAction(String title, String additional, byte[] image)
@@ -41,7 +75,7 @@ public class DbManager {
         realm.beginTransaction();
         Action action = realm.createObject(Action.class, UUID.randomUUID().toString());
         action.setTitle(title);
-        action.setStatus(-1);
+        action.setStatus(DbManager.IN_PROGRESS);
         action.setAdditional(additional);
         action.setImage(image);
         action.setCreate_date(new Date());
