@@ -20,6 +20,7 @@ public class DbManager {
     public static final int CONFIRMED = 1;
     public static final int UNCONFIRMED = -1;
     public static final int IN_PROGRESS = 0;
+    public static final int ALL = 99;
 
     public static DbManager getInstance(Context context) {
         if (instance == null)
@@ -93,6 +94,7 @@ public class DbManager {
     public void close()
     {
         realm.close();
+        instance = null;
     }
 
     private List<Action> getActionsByStatus(int val)

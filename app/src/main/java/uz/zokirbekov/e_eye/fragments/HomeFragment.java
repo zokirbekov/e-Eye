@@ -115,7 +115,7 @@ public class HomeFragment extends Fragment {
 
     private void filterByStatus(int status)
     {
-        if (status == 99)
+        if (status == DbManager.ALL)
         {
             initAdapter(actions);
         }
@@ -162,10 +162,16 @@ public class HomeFragment extends Fragment {
         lastClickedStatus.setColorFilter(Color.WHITE);
         imageAll.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.all));
         lastClickedStatus = imageAll;
-        filterByStatus(99);
+        filterByStatus(DbManager.ALL);
     }
 
-//    @OnClick(R.id.image_in_progress)
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        //DbManager.getInstance(getContext()).close();
+    }
+
+    //    @OnClick(R.id.image_in_progress)
 //    void onInProgressClicked()
 //    {
 //        lastClickedStatus.setColorFilter(Color.WHITE);

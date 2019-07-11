@@ -1,6 +1,5 @@
 package uz.zokirbekov.e_eye.fragments;
 
-import android.icu.util.Freezable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -19,7 +18,6 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -129,7 +127,7 @@ public class StatisticsFragment extends Fragment {
                     data.add(new Entry(time,count));
                 });
 
-        System.out.println();
+        //System.out.println();
                 //.map(x -> )
                 //.count();
 

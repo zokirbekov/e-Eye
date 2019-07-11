@@ -1,6 +1,7 @@
 package uz.zokirbekov.e_eye.adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,6 +27,7 @@ import uz.zokirbekov.e_eye.managers.DbManager;
 import uz.zokirbekov.e_eye.models.Action;
 import uz.zokirbekov.e_eye.utils.AnimationHelper;
 import uz.zokirbekov.e_eye.utils.DateFormatter;
+import uz.zokirbekov.e_eye.utils.Utils;
 
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.VH> {
 
@@ -62,6 +64,8 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.VH> {
 
         if (data != null)
             holder.item_image.setImageBitmap(BitmapFactory.decodeByteArray(data,0,data.length));
+        else
+            holder.item_image.setTag(1);
 
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.item_animation);
         holder.itemView.startAnimation(animation);
@@ -119,9 +123,15 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.VH> {
                     }
                     break;
                 case R.id.item_image:
-                    Bitmap bitmap = ((BitmapDrawable)item_image.getDrawable()).getBitmap();
-                    ImageDialogFragment.newInstance(bitmap)
-                            .show(fragment.getFragmentManager(),"IMAGE_DIALOG_FRAGMENT");
+
+                    if (item_image.getTag() == null) {
+                        Bitmap bitmap = ((BitmapDrawable) item_image.getDrawable()).getBitmap();
+                        ImageDialogFragment.newInstance(bitmap)
+                                .show(fragment.getFragmentManager(),"IMAGE_DIALOG_FRAGMENT");
+                    }
+                    else
+                        Utils.getInstance(context).showSnackBar(fragment.getView(),"Photo is empty");
+
                     break;
             }
         }

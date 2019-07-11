@@ -1,6 +1,7 @@
 package uz.zokirbekov.e_eye.fragments;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -21,8 +22,11 @@ public class ImageDialogFragment extends DialogFragment {
 
     public static ImageDialogFragment newInstance(Bitmap bitmap) {
 
-        Bundle args = new Bundle();
-        args.putParcelable("image",bitmap);
+        Bundle args = null;
+        if (bitmap != null) {
+            args = new Bundle();
+            args.putParcelable("image", bitmap);
+        }
         ImageDialogFragment fragment = new ImageDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -34,6 +38,8 @@ public class ImageDialogFragment extends DialogFragment {
         ButterKnife.bind(this,v);
         if (getArguments() != null)
             imageView.setImageBitmap(getArguments().getParcelable("image"));
+        else
+            imageView.setColorFilter(Color.BLACK);
         return v;
     }
 }

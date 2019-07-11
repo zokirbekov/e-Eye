@@ -13,6 +13,8 @@ import uz.zokirbekov.e_eye.fragments.HomeFragment;
 import uz.zokirbekov.e_eye.fragments.MainFragment;
 import uz.zokirbekov.e_eye.fragments.RegistrationFragment;
 import uz.zokirbekov.e_eye.fragments.StatisticsFragment;
+import uz.zokirbekov.e_eye.managers.DbManager;
+import uz.zokirbekov.e_eye.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,5 +34,11 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.content,fragment);
         ft.commit();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Utils.dispose();
     }
 }

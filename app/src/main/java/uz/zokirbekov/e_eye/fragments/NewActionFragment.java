@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -24,6 +25,7 @@ import uz.zokirbekov.e_eye.R;
 import uz.zokirbekov.e_eye.managers.DbManager;
 import uz.zokirbekov.e_eye.models.Action;
 import uz.zokirbekov.e_eye.utils.BitmapConverter;
+import uz.zokirbekov.e_eye.utils.Utils;
 
 public class NewActionFragment extends Fragment {
 
@@ -59,11 +61,13 @@ public class NewActionFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 0)
-        if (data.getExtras() != null)
-            if (data.getExtras().containsKey("data")) {
-                Bitmap image = (Bitmap) data.getExtras().get("data");
-                Bitmap resized = Bitmap.createScaledBitmap(image, imageView.getWidth(), imageView.getHeight(), true);
-                imageView.setImageBitmap(resized);
+            if (data != null) {
+                if (data.getExtras() != null)
+                    if (data.getExtras().containsKey("data")) {
+                        Bitmap image = (Bitmap) data.getExtras().get("data");
+                        Bitmap resized = Bitmap.createScaledBitmap(image, imageView.getWidth(), imageView.getHeight(), true);
+                        imageView.setImageBitmap(resized);
+                    }
             }
     }
 
@@ -72,12 +76,24 @@ public class NewActionFragment extends Fragment {
     {
         String title = editTextTitle.getText().toString().trim();
         String subscription = editTextSubscription.getText().toString().trim();
+        byte[] byteArray = null;
 
-        Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
-        byte[] byteArray = BitmapConverter.getInstance().bitmapToByteArray(bitmap);
+        if (imageView.getDrawable() instanceof BitmapDrawable) {
+            Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
+            byteArray = BitmapConverter.getInstance().bitmapToByteArray(bitmap);
+        }
 
         DbManager.getInstance(getContext()).addAction(title,subscription,byteArray);
+        cleanInputs();
+        Utils.getInstance(getContext()).showSnackBar(getView(),"Successfully added");
+
     }
 
+    private void cleanInputs()
+    {
+        editTextTitle.setText("");
+        editTextSubscription.setText("");
+        imageView.setImageResource(R.drawable.camera);
+    }
 
 }
