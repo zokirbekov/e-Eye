@@ -212,7 +212,7 @@
         android:elevation="3dp"
         android:layout_margin="16dp"
         app:cardCornerRadius="10dp"
-        app:cardBackgroundColor="@color/colorLightBlue"
+        app:cardBackgroundColor="@color/colorPrimary"
         android:layout_gravity="bottom">
 
         <TextView

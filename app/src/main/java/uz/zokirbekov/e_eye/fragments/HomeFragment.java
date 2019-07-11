@@ -2,6 +2,7 @@ package uz.zokirbekov.e_eye.fragments;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.List;
@@ -63,6 +65,9 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.image_unconfirmed)
     ImageView imageUnconfirmed;
 
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
     private ImageView lastClickedStatus;
 
     List<Action> actions;
@@ -76,6 +81,8 @@ public class HomeFragment extends Fragment {
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
         listView.addItemDecoration(new VerticalSpaceItemDecoration(48));
         lastClickedStatus = imageAll;
+
+        progressBar.getIndeterminateDrawable().setColorFilter(ContextCompat.getColor(getContext(),R.color.colorPrimary), PorterDuff.Mode.ADD);
 //        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams)listView.getLayoutParams();
 //        params.setBehavior(new AppBarLayout.ScrollingViewBehavior());
 //        listView.requestLayout();
@@ -86,6 +93,7 @@ public class HomeFragment extends Fragment {
 
     private void initListView()
     {
+        progressBar.setVisibility(View.VISIBLE);
         actions = DbManager.getInstance(getContext()).getAllActions();
         textItemCount.setText(String.valueOf(actions.size()));
 
@@ -100,6 +108,7 @@ public class HomeFragment extends Fragment {
     {
         ItemsAdapter adapter = new ItemsAdapter(this,actions);
         listView.setAdapter(adapter);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void setCountByStatus(List<Action> actions, int i, TextView v)
@@ -168,7 +177,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        //DbManager.getInstance(getContext()).close();
+        DbManager.getInstance(getContext()).close();
     }
 
     //    @OnClick(R.id.image_in_progress)

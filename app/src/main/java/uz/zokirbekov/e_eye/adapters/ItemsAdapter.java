@@ -64,8 +64,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.VH> {
 
         if (data != null)
             holder.item_image.setImageBitmap(BitmapFactory.decodeByteArray(data,0,data.length));
-        else
+        else {
             holder.item_image.setTag(1);
+            holder.item_image.setImageResource(R.drawable.no_photo);
+        }
 
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.item_animation);
         holder.itemView.startAnimation(animation);
