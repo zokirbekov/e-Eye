@@ -67,19 +67,137 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="64dp"
                 app:cardBackgroundColor="@color/colorWhite"
                 app:cardCornerRadius="16dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="16dp">
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
+
                     <uz.zokirbekov.e_eye.ui.KeyValueView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         app:key="Name"
                         app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
+                    <uz.zokirbekov.e_eye.ui.KeyValueView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        app:key="Name"
+                        app:value="NAME"/>
+
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -87,5 +205,25 @@
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="3dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/colorLightBlue"
+        android:layout_gravity="bottom">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text="Created by Zokirbekov"
+            android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:layout_margin="8dp"/>
+
+    </android.support.v7.widget.CardView>
 
 </android.support.design.widget.CoordinatorLayout>
