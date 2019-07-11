@@ -22,11 +22,8 @@ public class ImageDialogFragment extends DialogFragment {
 
     public static ImageDialogFragment newInstance(Bitmap bitmap) {
 
-        Bundle args = null;
-        if (bitmap != null) {
-            args = new Bundle();
-            args.putParcelable("image", bitmap);
-        }
+        Bundle args = new Bundle();
+        args.putParcelable("image", bitmap);
         ImageDialogFragment fragment = new ImageDialogFragment();
         fragment.setArguments(args);
         return fragment;
@@ -36,10 +33,7 @@ public class ImageDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.dialog_fragment_image, container, false);
         ButterKnife.bind(this,v);
-        if (getArguments() != null)
-            imageView.setImageBitmap(getArguments().getParcelable("image"));
-        else
-            imageView.setColorFilter(Color.BLACK);
+        imageView.setImageBitmap(getArguments().getParcelable("image"));
         return v;
     }
 }
