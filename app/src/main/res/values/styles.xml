@@ -10,5 +10,10 @@
         <item name="colorControlActivated">@color/colorWhite</item>
         <item name="colorControlHighlight">@color/colorWhite</item>
     </style>
-
+    
+    <style name="edit_text" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/colorLightBlue</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+    
 </resources>
