@@ -79,7 +79,7 @@
                     android:layout_height="match_parent"
                     android:hint="@string/subscription"
                     app:hintTextAppearance="@style/edit_text"
-                    android:textColorHint="@color/colorLightBlue"
+                    android:textColorHint="@color/colorPrimary"
                     android:layout_margin="8dp">
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/editText_subscription"

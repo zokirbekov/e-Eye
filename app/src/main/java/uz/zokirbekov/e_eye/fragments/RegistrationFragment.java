@@ -18,6 +18,9 @@ import uz.zokirbekov.e_eye.adapters.RegistrationFragmentsAdapter;
 
 public class RegistrationFragment extends Fragment {
 
+    public static final int PASSPORT = 0;
+    public static final int ONE_ID = 1;
+
     @BindView(R.id.viewPager)
     ViewPager viewPager;
 
@@ -28,6 +31,12 @@ public class RegistrationFragment extends Fragment {
         init();
         return v;
     }
+
+    public void switchFragment(int i)
+    {
+        viewPager.setCurrentItem(i);
+    }
+
     private void init()
     {
         ArrayList<Fragment> fragments = new ArrayList<>();

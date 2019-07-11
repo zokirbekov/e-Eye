@@ -12,7 +12,7 @@
     </style>
     
     <style name="edit_text" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">@color/colorLightBlue</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">14sp</item>
     </style>
     

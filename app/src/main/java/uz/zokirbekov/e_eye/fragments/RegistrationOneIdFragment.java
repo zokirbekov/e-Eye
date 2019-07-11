@@ -27,4 +27,10 @@ public class RegistrationOneIdFragment extends Fragment{
     {
         ((MainActivity)getActivity()).switchFragment(new MainFragment());
     }
+
+    @OnClick(R.id.layout_passport)
+    void onOneIdClicked()
+    {
+        ((RegistrationFragment)getParentFragment()).switchFragment(RegistrationFragment.PASSPORT);
+    }
 }

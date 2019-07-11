@@ -14,7 +14,7 @@ import uz.zokirbekov.e_eye.MainActivity;
 import uz.zokirbekov.e_eye.R;
 
 public class RegistrationERIFragment extends Fragment {
-    @Nullable
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_registration_eri,container,false);
@@ -26,5 +26,11 @@ public class RegistrationERIFragment extends Fragment {
     void loginClick()
     {
         ((MainActivity)getActivity()).switchFragment(new MainFragment());
+    }
+
+    @OnClick(R.id.layout_oneid)
+    void onOneIdClicked()
+    {
+        ((RegistrationFragment)getParentFragment()).switchFragment(RegistrationFragment.ONE_ID);
     }
 }
