@@ -73,12 +73,11 @@ public class MainFragment extends Fragment implements BottomNavigationView.OnNav
     public void exit()
     {
         new AlertDialog.Builder(getContext())
-                .setNegativeButton("No",null)
-                .setPositiveButton("Yes", (dialog, which) -> ((MainActivity)getActivity()).switchFragment(new RegistrationFragment()))
-                .setTitle("Message")
-                .setMessage("Do you want to exit?")
+                .setNegativeButton(R.string.no,null)
+                .setPositiveButton(R.string.yes, (dialog, which) -> ((MainActivity)getActivity()).switchFragment(new RegistrationFragment()))
+                .setTitle(R.string.message)
+                .setMessage(R.string.do_you_exit)
                 .show();
-
     }
 
     public void switchFragment(Fragment fragment)

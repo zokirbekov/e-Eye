@@ -16,5 +16,9 @@
     <string name="text_new">New</string>
     <string name="about">About</string>
     <string name="exit">Exit</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="message">Message</string>
+    <string name="do_you_exit">Do you want to exit?</string>
 
 </resources>
