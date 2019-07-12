@@ -1,5 +1,6 @@
 package uz.zokirbekov.e_eye.fragments;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import uz.zokirbekov.e_eye.MainActivity;
 import uz.zokirbekov.e_eye.R;
 import uz.zokirbekov.e_eye.managers.DbManager;
 import uz.zokirbekov.e_eye.models.Action;
@@ -61,10 +64,23 @@ public class MainFragment extends Fragment implements BottomNavigationView.OnNav
             case R.id.newAction : switchFragment(newActionFragment); break;
             case R.id.statistics : switchFragment(statisticsFragment); break;
             case R.id.about : switchFragment(aboutFragment); break;
+            case R.id.exit : exit();
         }
         return true;
 
     }
+
+    public void exit()
+    {
+        new AlertDialog.Builder(getContext())
+                .setNegativeButton("No",null)
+                .setPositiveButton("Yes", (dialog, which) -> ((MainActivity)getActivity()).switchFragment(new RegistrationFragment()))
+                .setTitle("Message")
+                .setMessage("Do you want to exit?")
+                .show();
+
+    }
+
     public void switchFragment(Fragment fragment)
     {
         FragmentManager fm = getFragmentManager();

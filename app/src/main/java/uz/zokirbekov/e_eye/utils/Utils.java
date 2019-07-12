@@ -25,8 +25,10 @@ public class Utils {
 
     public static void dispose()
     {
-        instance.context = null;
-        instance = null;
+        if (instance != null) {
+            instance.context = null;
+            instance = null;
+        }
     }
 
 }

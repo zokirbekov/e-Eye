@@ -11,5 +11,10 @@
     <string name="creator">Created by Zokirbekov</string>
     <string name="name">Name</string>
     <string name="surame">Surame</string>
+    <string name="home">Home</string>
+    <string name="statistics">Statistics</string>
+    <string name="text_new">New</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
 
 </resources>

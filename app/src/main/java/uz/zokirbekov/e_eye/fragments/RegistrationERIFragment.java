@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,15 @@ import uz.zokirbekov.e_eye.R;
 
 public class RegistrationERIFragment extends Fragment {
 
+    ViewPager pager;
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_registration_eri,container,false);
         ButterKnife.bind(this,v);
+
+        pager = getActivity().findViewById(R.id.viewPager);
+
         return v;
     }
 
@@ -31,6 +37,6 @@ public class RegistrationERIFragment extends Fragment {
     @OnClick(R.id.layout_oneid)
     void onOneIdClicked()
     {
-        ((RegistrationFragment)getParentFragment()).switchFragment(RegistrationFragment.ONE_ID);
+        pager.setCurrentItem(RegistrationFragment.ONE_ID);
     }
 }
